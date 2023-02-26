@@ -5,6 +5,7 @@ import Controller.UserController;
 import Model.task_screen;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,9 +33,13 @@ public class AddTaskScreen extends JFrame implements ActionListener {
         constraints.gridx = 0;
         constraints.gridy = 0;
         add(jobIdLabel, constraints);
+        jobIdLabel.setForeground(Color.decode("#16B13B"));
 
         jobIdComboBox = new JComboBox();
+
         jobIdComboBox.addItem("Select Job ID");
+        jobIdComboBox.setBackground(Color.decode("#16B13B"));
+        jobIdComboBox.setForeground(Color.decode("#ffffff"));
         // Add job IDs to the combo box
         try {
             String username = "root";
@@ -61,10 +66,13 @@ public class AddTaskScreen extends JFrame implements ActionListener {
         task1Label = new JLabel("Task:");
         constraints.gridx = 0;
         constraints.gridy = 1;
+        task1Label.setForeground(Color.decode("#16B13B"));
         add(task1Label, constraints);
 
         task1ComboBox = new JComboBox();
         task1ComboBox.addItem("Select Task");
+        task1ComboBox.setBackground(Color.decode("#16B13B"));
+        task1ComboBox.setForeground(Color.decode("#ffffff"));
         try {
             String username = "root";
             String password = null;
@@ -86,9 +94,12 @@ public class AddTaskScreen extends JFrame implements ActionListener {
         task2Label = new JLabel("Depends upon:");
         constraints.gridx = 0;
         constraints.gridy = 2;
+        task2Label.setForeground(Color.decode("#16B13B"));
         add(task2Label, constraints);
 
         task2ComboBox = new JComboBox();
+        task2ComboBox.setBackground(Color.decode("#16B13B"));
+       task2ComboBox.setForeground(Color.decode("#ffffff"));
         task2ComboBox.addItem("Select Task");
         try {
             String username = "root";
@@ -113,12 +124,19 @@ public class AddTaskScreen extends JFrame implements ActionListener {
         addTaskButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 3;
+        addTaskButton.setBackground(Color.decode("#16B13B"));
+        addTaskButton.setForeground(Color.decode("#ffffff"));
+        LineBorder lineBorder =new LineBorder(Color.decode("#16B13B"), 2, true);
+        addTaskButton.setBorder(lineBorder);
         add(addTaskButton, constraints);
 
         backButton = new JButton("Go Back");
         backButton.addActionListener(this);
-        constraints.gridx = 0;
-        constraints.gridy = 3;
+        backButton.setBackground(Color.decode("#16B13B"));
+        backButton.setForeground(Color.decode("#ffffff"));
+        backButton.setBorder(lineBorder);
+        constraints.gridx = 1;
+        constraints.gridy = 4;
         add(backButton, constraints);
 
         setTitle("Add Task Screen");
@@ -167,6 +185,7 @@ public class AddTaskScreen extends JFrame implements ActionListener {
             this.dispose();
         }
     }
+
 
 }
 

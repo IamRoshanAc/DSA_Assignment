@@ -1,84 +1,77 @@
-//
-//
-import java.util.*;
-
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Q_N_7_b {
-        Queue<String> queue = new LinkedList<>();
-        Set<String> visited = new HashSet<>();
-        int workingThreads = 0;
+    // Set up the initial queue with the starting URLs
+    private static BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+    static {
+        queue.add("https://google.com");
+    }
 
-        public void crawl() {
-                OUTER_LOOP: while(true) {
-                        String nextUrl;
-                        synchronized(this) {
-                                while(queue.isEmpty()) {
-                                        if(workingThreads == 0) {
-                                                break OUTER_LOOP;
-                                        }
-                                        try {
-                                                wait();
-                                        } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                        }
-                                }
-                                nextUrl = queue.poll();
-                                workingThreads++;
-                        }
-                        List<String> URLs = getLinks(nextUrl);
+    // Set up the maximum number of threads to be used
+    private static final int MAX_THREADS = 10;
 
-                        synchronized(this) {
-                                for(String newUrl: URLs) {  // 'URLs' instead of 'urls'
-                                        if(!visited.contains(newUrl)) {
-                                                queue.offer(newUrl);
-                                                visited.add(newUrl);
-                                        }
-                                }
-                                workingThreads--;
-                                notifyAll();
-                        }
-                }
+    // Set up a HashSet to keep track of visited URLs
+    private static HashSet<String> visited = new HashSet<>();
+
+    public static void main(String[] args) throws InterruptedException {
+        // Create the threads and start them
+        Thread[] threads = new Thread[MAX_THREADS];
+        for (int i = 0; i < MAX_THREADS; i++) {
+            threads[i] = new Thread(new Crawler());
+            threads[i].start();
         }
 
-        // Sample method to get a list of links on a webpage
-        public List<String> getLinks(String url) {
-                List<String> links = new ArrayList<>();
-                // Code to fetch links goes here
-                return links;
+        // Wait for all tasks to be completed
+        for (Thread thread : threads) {
+            thread.join();
         }
+    }
 
-        public static void main(String[] args) {
-                // Create a new instance of Q7_b
-                Q_N_7_b webCrawler = new Q_N_7_b();
+    private static class Crawler implements Runnable {
+        public void run() {
+            while (true) {
+                try {
+                    // Get the next URL from the queue
+                    String url = queue.take();
 
-                // Add a starting URL to the queue
-                String startingUrl = "https://schoolworkspro.com/assignment-submission/63d74abe0b46be66433a4623";
-                webCrawler.queue.offer(startingUrl);
-                webCrawler.visited.add(startingUrl);
+                    // Check if the URL has already been visited
+                    if (visited.contains(url)) {
+                        continue;
+                    }
 
-                // Create an array of worker threads
-                Thread[] workers = new Thread[5];
-                for (int i = 0; i < workers.length; i++) {
-                        // Each worker runs the crawl() method of the webCrawler instance
-                        workers[i] = new Thread(webCrawler::crawl);
-                        workers[i].start();
-                }
+                    // Make a request to the URL
+                    URL urlObj = new URL(url);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(urlObj.openStream()));
 
-                // Wait for all worker threads to finish
-                for (Thread worker : workers) {
-                        try {
-                                worker.join();
-                        } catch (InterruptedException e) {
-                                e.printStackTrace();
+                    // Extract links from the response
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.contains("href=")) {
+                            int startIndex = line.indexOf("href=") + 6;
+                            int endIndex = line.indexOf("\"", startIndex);
+                            String link = line.substring(startIndex, endIndex);
+
+                            // Convert relative URLs to absolute URLs
+                            if (!link.startsWith("http")) {
+                                link = urlObj.getProtocol() + "://" + urlObj.getHost() + link;
+                            }
+
+                            // Add the link to the queue if it hasn't been visited yet
+                            if (!visited.contains(link)) {
+                                queue.put(link);
+                            }
                         }
-                }
+                    }
 
-                // Print the URLs that were visited
-                System.out.println("Visited URLs:");
-                for (String url : webCrawler.visited) {
-                        System.out.println(url);
-                }
+                    // Mark the URL as visited
+                    visited.add(url);
+                } catch (Exception ignore) {}
+            }
         }
-
+    }
 }

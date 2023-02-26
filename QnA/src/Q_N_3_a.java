@@ -1,48 +1,37 @@
-import java.util.ArrayList;
-import java.util.List;
+//You are given an even length array; divide it in half and return possible minimum product difference of any two subarrays.
+//        Note that the minimal product difference is the smallest absolute difference between any two arrays a and b, which is computed by calculating the difference after multiplying each element of the arrays a and b.
+//        Input: {5,2,4,11}
+//        Output: 2
+//        {5,4} {2,11} result into minimum product difference.
 
+
+import java.util.Arrays;
+
+//You are given an even length array; divide it in half and return possible minimum product difference of any two
+//        subarrays.
+//        Note that the minimal product difference is the smallest absolute difference between any two arrays a and b, which
+//        is computed by calculating the difference after multiplying each element of the arrays a and b.
+//        Input: {5,2,4,11}
+//        Output: 2
+//        {5,4} {2,11} result into minimum product difference
+//
 public class Q_N_3_a {
-    public static void main(String[] args) {
-        int[] nums = {5, 2, 4, 11};
-        int n = nums.length;
-        int half = n / 2;
-
-        // generate all possible subsets of the first half
-        List<List<Integer>> subsets = new ArrayList<>();
-        for (int i = 0; i < (1 << half); i++) {
-            List<Integer> subset = new ArrayList<>();
-            for (int j = 0; j < half; j++) {
-                if ((i & (1 << j)) > 0) {
-                    subset.add(nums[j]);
-                }
-            }
-            subsets.add(subset);
-        }
-
-        // compute the minimum product difference
+    public static int minProductDifference(int[] arr) {
+        Arrays.sort(arr); // sort the input array
+        int n = arr.length;
         int minDiff = Integer.MAX_VALUE;
-        for (List<Integer> subset : subsets) {
-            List<Integer> complement = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                if (!subset.contains(nums[i])) {
-                    complement.add(nums[i]);
-                }
-            }
-            int prod1 = computeProduct(subset);
-            int prod2 = computeProduct(complement);
-            int diff = Math.abs(prod1 - prod2);
+        // calculate the difference between two subarrays with the minimum product difference
+        for (int i = 0; i < n / 2; i++) {
+            int product1 = arr[i] * arr[n - i - 1];
+            int product2 = arr[n / 2 + i] * arr[n - n / 2 - i - 1];
+            int diff = Math.abs(product1 - product2);
             minDiff = Math.min(minDiff, diff);
         }
-
-        // output the result
-        System.out.println(minDiff);
+        return minDiff;
     }
 
-    private static int computeProduct(List<Integer> nums) {
-        int product = 1;
-        for (int num : nums) {
-            product *= num;
-        }
-        return product;
+    public static void main(String[] args) {
+        int[] arr = {5, 2, 4, 11};
+        System.out.println(minProductDifference(arr)); // outputs 2
     }
 }

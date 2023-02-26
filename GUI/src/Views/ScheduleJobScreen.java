@@ -3,6 +3,7 @@ package Views;
 import Controller.UserController;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,9 +30,12 @@ public class ScheduleJobScreen extends JFrame implements ActionListener {
         jobIdLabel = new JLabel("Job ID:");
         constraints.gridx = 0;
         constraints.gridy = 0;
+        jobIdLabel.setForeground(Color.decode("#16B13B"));
         add(jobIdLabel, constraints);
-
+        LineBorder lineBorder =new LineBorder(Color.decode("#16B13B"), 2, true);
         jobIdComboBox = new JComboBox<String>();
+        jobIdComboBox.setBackground(Color.decode("#16B13B"));
+        jobIdComboBox.setForeground(Color.decode("#ffffff"));
         jobIdComboBox.addItem("Select Job ID");
         // Add job IDs to the combo box
         // Add job IDs to the combo box
@@ -60,6 +64,7 @@ public class ScheduleJobScreen extends JFrame implements ActionListener {
         startTimeLabel = new JLabel("Start Time:");
         constraints.gridx = 0;
         constraints.gridy = 1;
+        startTimeLabel.setForeground(Color.decode("#16B13B"));
         add(startTimeLabel, constraints);
 
         Date date = new Date();
@@ -68,18 +73,29 @@ public class ScheduleJobScreen extends JFrame implements ActionListener {
         startTimeSpinner.setEditor(new JSpinner.DateEditor(startTimeSpinner, "yyyy/MM/dd HH:mm:ss"));
         constraints.gridx = 1;
         constraints.gridy = 1;
+        startTimeSpinner.setForeground(Color.decode("#16B13B"));
+        startTimeSpinner.setBackground(Color.decode("#16B13B"));
+        startTimeSpinner.setForeground(Color.decode("#ffffff"));
         add(startTimeSpinner, constraints);
 
         scheduleJobButton = new JButton("Schedule Job");
         scheduleJobButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 2;
+        scheduleJobButton.setBackground(Color.decode("#16B13B"));
+        scheduleJobButton.setForeground(Color.decode("#ffffff"));
+        scheduleJobButton.setBorder(lineBorder);
+
         add(scheduleJobButton, constraints);
 
         backButton = new JButton("Go Back");
         backButton.addActionListener(this);
         constraints.gridx = 0;
         constraints.gridy = 2;
+        backButton.setBackground(Color.decode("#16B13B"));
+        backButton.setForeground(Color.decode("#ffffff"));
+        backButton.setBorder(lineBorder);
+
         add(backButton, constraints);
 
         setTitle("Schedule Job Screen");
@@ -152,5 +168,6 @@ public class ScheduleJobScreen extends JFrame implements ActionListener {
             this.dispose();
         }
     }
+
 
 }

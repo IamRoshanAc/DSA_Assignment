@@ -5,6 +5,7 @@ import Model.Job;
 import Model.User;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ public class CreateJobScreen extends JFrame implements ActionListener {
         jobNameLabel = new JLabel("Job Name:");
         constraints.gridx = 0;
         constraints.gridy = 0;
+        jobNameLabel.setForeground(Color.decode("#16B13B"));
         add(jobNameLabel, constraints);
 
         jobNameField = new JTextField(20);
@@ -34,12 +36,19 @@ public class CreateJobScreen extends JFrame implements ActionListener {
         createButton.addActionListener(this);
         constraints.gridx = 0;
         constraints.gridy = 1;
+        createButton.setBackground(Color.decode("#16B13B"));
+        createButton.setForeground(Color.decode("#ffffff"));
+        LineBorder lineBorder =new LineBorder(Color.decode("#16B13B"), 2, true);
+        createButton.setBorder(lineBorder);
         add(createButton, constraints);
 
         backButton = new JButton("Go back");
         backButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 1;
+        backButton.setBackground(Color.decode("#16B13B"));
+        backButton.setForeground(Color.decode("#ffffff"));
+        backButton.setBorder(lineBorder);
         add(backButton, constraints);
 
         setTitle("Create Job Screen");
@@ -73,4 +82,5 @@ public class CreateJobScreen extends JFrame implements ActionListener {
             this.dispose();
         }
     }
+
 }

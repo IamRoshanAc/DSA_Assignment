@@ -4,6 +4,7 @@ import Controller.UserController;
 import Model.User;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ public class SignUpScreen extends JFrame implements ActionListener {
         usernameLabel = new JLabel("Username:");
         constraints.gridx = 0;
         constraints.gridy = 0;
+        usernameLabel.setForeground(Color.decode("#16B13B"));
         add(usernameLabel, constraints);
 
         usernameField = new JTextField(20);
@@ -38,6 +40,7 @@ public class SignUpScreen extends JFrame implements ActionListener {
         passwordLabel = new JLabel("Password:");
         constraints.gridx = 0;
         constraints.gridy = 1;
+        passwordLabel.setForeground(Color.decode("#16B13B"));
         add(passwordLabel, constraints);
 
         passwordField = new JPasswordField(20);
@@ -48,23 +51,32 @@ public class SignUpScreen extends JFrame implements ActionListener {
         emailLabel = new JLabel("Email:");
         constraints.gridx = 0;
         constraints.gridy = 2;
+        emailLabel.setForeground(Color.decode("#16B13B"));
         add(emailLabel, constraints);
 
         emailField = new JTextField(20);
         constraints.gridx = 1;
         constraints.gridy = 2;
+
         add(emailField, constraints);
 
         signupButton = new JButton("Sign Up");
         signupButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 3;
+        signupButton.setBackground(Color.decode("#16B13B"));
+        signupButton.setForeground(Color.decode("#ffffff"));
+        LineBorder lineBorder =new LineBorder(Color.decode("#16B13B"), 2, true);
+        signupButton.setBorder(lineBorder);
         add(signupButton, constraints);
 
         backButton = new JButton("Go Back");
         backButton.addActionListener(this);
         constraints.gridx = 0;
         constraints.gridy = 3;
+        backButton.setBackground(Color.decode("#16B13B"));
+        backButton.setForeground(Color.decode("#ffffff"));
+        backButton.setBorder(lineBorder);
         add(backButton, constraints);
 
         setTitle("SignUp Screen");
@@ -120,7 +132,6 @@ public class SignUpScreen extends JFrame implements ActionListener {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
 
 
 

@@ -4,6 +4,7 @@ import Controller.UserController;
 import Model.User;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,12 +30,18 @@ public class Dashboard extends JFrame implements ActionListener {
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 4;
+        welcome.setForeground(Color.decode("#16B13B"));
+        LineBorder lineBorder =new LineBorder(Color.decode("#16B13B"), 2, true);
+
         add(welcome, constraints);
 
         addTaskButton = new JButton("Add Task");
         addTaskButton.addActionListener(this);
         constraints.gridx = 0;
         constraints.gridy = 1;
+        addTaskButton.setBackground(Color.decode("#16B13B"));
+        addTaskButton.setForeground(Color.decode("#ffffff"));
+        addTaskButton.setBorder(lineBorder);
         constraints.gridwidth = 1;
         add(addTaskButton, constraints);
 
@@ -42,18 +49,27 @@ public class Dashboard extends JFrame implements ActionListener {
         createJobButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 1;
+        createJobButton.setBackground(Color.decode("#16B13B"));
+        createJobButton.setForeground(Color.decode("#ffffff"));
+        createJobButton.setBorder(lineBorder);
         add(createJobButton, constraints);
 
         addtasktojob = new JButton("Add task to job");
         addtasktojob.addActionListener(this);
         constraints.gridx = 2;
         constraints.gridy = 1;
+        addtasktojob.setBackground(Color.decode("#16B13B"));
+        addtasktojob.setForeground(Color.decode("#ffffff"));
+        addtasktojob.setBorder(lineBorder);
         add(addtasktojob, constraints);
 
         scheduleButton = new JButton("Schedule");
         scheduleButton.addActionListener(this);
         constraints.gridx = 3;
         constraints.gridy = 1;
+        scheduleButton.setBackground(Color.decode("#16B13B"));
+        scheduleButton.setForeground(Color.decode("#ffffff"));
+        scheduleButton.setBorder(lineBorder);
         add(scheduleButton, constraints);
 
         setTitle("Dashboard");
@@ -90,4 +106,5 @@ public class Dashboard extends JFrame implements ActionListener {
             // Schedule logic
         }
     }
+
 }

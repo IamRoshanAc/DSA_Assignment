@@ -5,6 +5,7 @@ import Model.Task;
 import Model.User;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ public class AddTask extends JFrame implements ActionListener {
         taskIdLabel = new JLabel("Task ID:");
         constraints.gridx = 0;
         constraints.gridy = 0;
+        taskIdLabel.setForeground(Color.decode("#16B13B"));
         add(taskIdLabel, constraints);
 
         taskIdField = new JTextField(20);
@@ -40,6 +42,7 @@ public class AddTask extends JFrame implements ActionListener {
         taskNameLabel = new JLabel("Task Name:");
         constraints.gridx = 0;
         constraints.gridy = 1;
+        taskNameLabel.setForeground(Color.decode("#16B13B"));
         add(taskNameLabel, constraints);
 
         taskNameField = new JTextField(20);
@@ -49,12 +52,19 @@ public class AddTask extends JFrame implements ActionListener {
 
         addTaskButton = new JButton("Add Task");
         addTaskButton.addActionListener(this);
+        addTaskButton.setBackground(Color.decode("#16B13B"));
+        addTaskButton.setForeground(Color.decode("#ffffff"));
+        LineBorder lineBorder =new LineBorder(Color.decode("#16B13B"), 2, true);
+        addTaskButton.setBorder(lineBorder);
         constraints.gridx = 0;
         constraints.gridy = 2;
         add(addTaskButton, constraints);
 
         goBackButton = new JButton("Go Back");
         goBackButton.addActionListener(this);
+        goBackButton.setBackground(Color.decode("#16B13B"));
+        goBackButton.setForeground(Color.decode("#ffffff"));
+        goBackButton.setBorder(lineBorder);
         constraints.gridx = 1;
         constraints.gridy = 2;
         add(goBackButton, constraints);

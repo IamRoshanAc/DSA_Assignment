@@ -25,6 +25,7 @@ public class LoginScreen extends JFrame implements ActionListener {
         usernameLabel = new JLabel("Username:");
         constraints.gridx = 0;
         constraints.gridy = 0;
+        usernameLabel.setForeground(Color.decode("#16B13B"));
         add(usernameLabel, constraints);
 
         usernameField = new JTextField(20);
@@ -35,6 +36,7 @@ public class LoginScreen extends JFrame implements ActionListener {
         passwordLabel = new JLabel("Password:");
         constraints.gridx = 0;
         constraints.gridy = 1;
+        passwordLabel.setForeground(Color.decode("#16B13B"));
         add(passwordLabel, constraints);
 
         passwordField = new JPasswordField(20);
@@ -46,8 +48,8 @@ public class LoginScreen extends JFrame implements ActionListener {
         loginButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 2;
-        loginButton.setBackground(Color.decode("#ffffff"));
-        loginButton.setForeground(Color.decode("#000000"));
+        loginButton.setBackground(Color.decode("#16B13B"));
+        loginButton.setForeground(Color.decode("#ffffff"));
         add(loginButton, constraints);
         LineBorder lineBorder =new LineBorder(Color.decode("#16B13B"), 2, true);
         loginButton.setBorder(lineBorder);
@@ -56,8 +58,8 @@ public class LoginScreen extends JFrame implements ActionListener {
         signupButton.addActionListener(this);
         constraints.gridx = 1;
         constraints.gridy = 4;
-        signupButton.setBackground(Color.decode("#ffffff"));
-        signupButton.setForeground(Color.decode("#000000"));
+        signupButton.setBackground(Color.decode("#16B13B"));
+        signupButton.setForeground(Color.decode("#ffffff"));
         add(signupButton, constraints);
         signupButton.setBorder(lineBorder);
 
